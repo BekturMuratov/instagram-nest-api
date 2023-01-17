@@ -13,15 +13,23 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
   username String @unique
-  bio String
-  followers Int
-  following Int
-  photos Photos @relation(fields: [photos_id], references: [id])
-  photos_id Int @unique
-  videos Videos @relation(fields: [videos_id], references: [id])
-  videos_id Int @unique
-  stories Stories @relation(fields: [stories_id], references: [id])
-  stories_id Int @unique
+  bio String?
+  followers Int?
+  following Int?
+  photos Photos? @relation(fields: [photos_id], references: [id])
+  photos_id Int? @unique
+  videos Videos? @relation(fields: [videos_id], references: [id])
+  videos_id Int? @unique
+  stories Stories? @relation(fields: [stories_id], references: [id])
+  stories_id Int? @unique
+  tags Tags? @relation(fields: [tags_id], references: [id])
+  tags_id Int?
+}
+
+model Tags {
+  id Int @id @default(autoincrement())
+  tagname String @unique
+  user User[]
 }
 
 model Photos {
