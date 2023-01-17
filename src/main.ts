@@ -9,7 +9,6 @@ async function bootstrap() {
     .setTitle('Instagram API')
     .setDescription('API for fun!!!')
     .setVersion('1.0')
-    .addTag('catstagram')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/', app, document);
