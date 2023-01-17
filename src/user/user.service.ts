@@ -12,12 +12,19 @@ export class UserService {
   }
 
   findAll() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      include: {
+        photos: true,
+      }
+    });
   }
 
   findOne(id: Prisma.UserWhereUniqueInput) {
     return this.prisma.user.findUnique({
-      where: id
+      where: id,
+      include: {
+        photos: true,
+      }
     });
   }
 
