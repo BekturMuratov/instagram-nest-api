@@ -21,12 +21,21 @@ export class TagsService {
     });
   }
 
+  findByTags(where: {tagname: string}){
+    return this.prisma.tags.findUnique({
+      where: {
+        tagname: where.tagname
+      }
+    })
+  }
+
   update(id: Prisma.TagsWhereUniqueInput, updateTagDto: Prisma.TagsUpdateInput) {
     return this.prisma.tags.update({
       where: id,
       data: updateTagDto
     });
   }
+
 
   remove(id: Prisma.TagsWhereUniqueInput) {
     return this.prisma.tags.delete({

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TagsService } from './tags.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
@@ -23,6 +23,11 @@ export class TagsController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.tagsService.findOne({id: +id});
+  }
+
+  @Get(':tagname')
+  findByUsername(@Query('tags') tagname:string) {
+    return this.tagsService.findByTags({tagname})
   }
 
   @Patch(':id')
