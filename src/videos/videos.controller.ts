@@ -2,13 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { VideosService } from './videos.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
+import { Prisma } from '@prisma/client';
 
 @Controller('videos')
 export class VideosController {
   constructor(private readonly videosService: VideosService) {}
 
   @Post()
-  create(@Body() createVideoDto: CreateVideoDto) {
+  create(@Body() createVideoDto: Prisma.VideosCreateInput) {
     return this.videosService.create(createVideoDto);
   }
 
@@ -19,16 +20,16 @@ export class VideosController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.videosService.findOne(+id);
+    return this.videosService.findOne({id: +id });
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateVideoDto: UpdateVideoDto) {
-    return this.videosService.update(+id, updateVideoDto);
+    return this.videosService.update({id: +id }, updateVideoDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.videosService.remove(+id);
+    return this.videosService.remove({id: +id});
   }
 }
